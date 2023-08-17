@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">JComposeTourist</string>
+    <string name="description">Image description</string>
 </resources>
