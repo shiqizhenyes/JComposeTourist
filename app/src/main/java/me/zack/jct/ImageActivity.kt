@@ -58,9 +58,15 @@ class ImageActivity : ComponentActivity() {
 @Composable
 fun ImageGreeting() {
     Column() {
-        Image(painter = painterResource(id = R.drawable.wallpaper), contentDescription = "anime-girl-airplane")
-        Image(painter = painterResource(id = R.drawable.wallpaper), contentDescription = "anime-girl-airplane",
-            modifier = Modifier.size(350.0.dp))
+        Image(
+            painter = painterResource(id = R.drawable.wallpaper),
+            contentDescription = "anime-girl-airplane"
+        )
+        Image(
+            painter = painterResource(id = R.drawable.wallpaper),
+            contentDescription = "anime-girl-airplane",
+            modifier = Modifier.size(350.0.dp)
+        )
 //        Surface(
 //            shape = CircleShape
 //        ) {
@@ -80,9 +86,13 @@ fun ImageGreeting() {
                 contentDescription = null
             )
             Spacer(modifier = Modifier.padding(5.0.dp))
-            Image(painter = rememberAsyncImagePainter(model = "https://picsum.photos/300/300"), contentDescription = null)
+            Image(
+                painter = rememberAsyncImagePainter(model = "https://picsum.photos/300/300"),
+                contentDescription = null
+            )
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current).data(data = "https://picsum.photos/300/300")
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(data = "https://picsum.photos/300/300")
                     .crossfade(true).build(),
                 contentDescription = stringResource(id = R.string.description),
                 placeholder = painterResource(id = R.drawable.placeholder),
@@ -102,7 +112,10 @@ fun ImageGreeting() {
                     CircularProgressIndicator()
                 } else {
                     SubcomposeAsyncImageContent(
-                         modifier = Modifier.blur(2.0.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded),
+                        modifier = Modifier.blur(
+                            2.0.dp,
+                            edgeTreatment = BlurredEdgeTreatment.Unbounded
+                        ),
                         colorFilter = ColorFilter.lighting(Color.Gray, Color.Gray)
                     )
                 }
