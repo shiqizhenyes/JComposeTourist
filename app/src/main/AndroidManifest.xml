@@ -15,6 +15,11 @@
         android:theme="@style/Theme.JComposeTourist"
         tools:targetApi="31">
         <activity
+            android:name=".RowActivity"
+            android:exported="false"
+            android:label="@string/title_activity_row"
+            android:theme="@style/Theme.JComposeTourist" />
+        <activity
             android:name=".BoxActivity"
             android:exported="false"
             android:label="@string/title_activity_box"

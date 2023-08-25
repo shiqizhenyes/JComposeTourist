@@ -7,6 +7,7 @@
     <string name="content3">桃之夭夭，其叶蓁蓁。之子于归，宜其家人。</string>
     <string name="title_activity_text_field">TextFieldActivity</string>
     <string name="title_activity_box">BoxActivity</string>
+    <string name="title_activity_row">RowActivity</string>
 
 
 </resources>
