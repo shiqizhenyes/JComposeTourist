@@ -213,7 +213,6 @@ fun ScaffoldGreeting(name: String, modifier: Modifier = Modifier) {
                 AppContent(items[selectedItem], modifier)
             }
         )
-
     }
 }
 
