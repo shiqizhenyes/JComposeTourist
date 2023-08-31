@@ -32,7 +32,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ButtonDefaults
@@ -43,6 +43,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -98,48 +99,51 @@ fun AppContent(itemTitle: String, modifier: Modifier) {
 }
 
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun AppDrawContent(scaffoldState: ScaffoldState, scope: CoroutineScope) {
-    Box {
-        Image(
-            painter = painterResource(id = R.drawable.background),
-            contentDescription = "Draw top background"
-        )
-        Column(modifier = Modifier.padding(15.dp)) {
-            Image(
-                painter = painterResource(id = R.drawable.avatar), contentDescription = "Avatar",
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(65.dp)
-                    .border(BorderStroke(1.dp, Color.Gray), CircleShape)
-            )
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
-            Text(text = "游客12345", style = MaterialTheme.typography.bodyMedium)
-        }
-    }
-    ListItem(
-        icon = {
-            Icon(Icons.Filled.Home, contentDescription = "Home")
-        },
-        modifier = Modifier.clickable {
+fun AppDrawContent(drawerState: DrawerState, scope: CoroutineScope) {
 
+    ModalDrawerSheet {
+        Box {
+            Image(
+                painter = painterResource(id = R.drawable.background),
+                contentDescription = "Draw top background"
+            )
+            Column(modifier = Modifier.padding(15.dp)) {
+                Image(
+                    painter = painterResource(id = R.drawable.avatar), contentDescription = "Avatar",
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(65.dp)
+                        .border(BorderStroke(1.dp, Color.Gray), CircleShape)
+                )
+                Spacer(modifier = Modifier.padding(vertical = 8.dp))
+                Text(text = "游客12345", style = MaterialTheme.typography.bodyMedium)
+            }
         }
-    ) {
-        Text(text = "首页")
-    }
-    Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.BottomStart) {
-        TextButton(
-            onClick = { /*TODO*/ },
-            colors = ButtonDefaults.textButtonColors(containerColor = MaterialTheme.colorScheme.surface)
+        ListItem(
+            icon = {
+                Icon(Icons.Filled.Home, contentDescription = "Home")
+            },
+            modifier = Modifier.clickable {
+
+            }
         ) {
-            Icon(Icons.Filled.Settings, contentDescription = "Settings")
-            Text(text = "设置")
+            Text(text = "首页")
+        }
+        Box(modifier = Modifier.fillMaxHeight(), contentAlignment = Alignment.BottomStart) {
+            TextButton(
+                onClick = { /*TODO*/ },
+                colors = ButtonDefaults.textButtonColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                Icon(Icons.Filled.Settings, contentDescription = "Settings")
+                Text(text = "设置")
+            }
         }
     }
-    BackHandler(enabled = scaffoldState.drawerState.isOpen) {
+    BackHandler(enabled = drawerState.isOpen) {
         scope.launch {
-            scaffoldState.drawerState.close()
+            drawerState.close()
         }
     }
 }
@@ -148,7 +152,7 @@ fun AppDrawContent(scaffoldState: ScaffoldState, scope: CoroutineScope) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ScaffoldGreeting(name: String, modifier: Modifier = Modifier) {
-    val scaffoldState = rememberScaffoldState()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val scope = rememberCoroutineScope()
     var selectedItem by remember {
         mutableIntStateOf(0)
@@ -158,10 +162,10 @@ fun ScaffoldGreeting(name: String, modifier: Modifier = Modifier) {
     var iconDescription: String = "Home"
     ModalNavigationDrawer(drawerContent = {
         AppDrawContent(
-            scaffoldState = scaffoldState,
+            drawerState = drawerState,
             scope = scope
         )
-    }) {
+    }, drawerState = drawerState) {
         Scaffold(
             topBar = {
                 TopAppBar(title = {
@@ -170,7 +174,7 @@ fun ScaffoldGreeting(name: String, modifier: Modifier = Modifier) {
                     navigationIcon = {
                         IconButton(onClick = {
                             scope.launch {
-                                scaffoldState.drawerState.open()
+                                drawerState.open()
                             }
                         }) {
                             Icon(Icons.Filled.Menu, contentDescription = "Menu")
