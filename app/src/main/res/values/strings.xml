@@ -11,6 +11,7 @@
     <string name="title_activity_column">ColumnActivity</string>
     <string name="title_activity_flow_layout">FlowLayoutActivity</string>
     <string name="title_activity_scaffold">ScaffoldActivity</string>
+    <string name="title_activity_surface">SurfaceActivity</string>
 
 
 </resources>
