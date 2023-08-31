@@ -15,6 +15,11 @@
         android:theme="@style/Theme.JComposeTourist"
         tools:targetApi="31">
         <activity
+            android:name=".SpacerActivity"
+            android:exported="false"
+            android:label="@string/title_activity_spacer"
+            android:theme="@style/Theme.JComposeTourist" />
+        <activity
             android:name=".SurfaceActivity"
             android:exported="false"
             android:label="@string/title_activity_surface"

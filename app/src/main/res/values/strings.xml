@@ -12,6 +12,7 @@
     <string name="title_activity_flow_layout">FlowLayoutActivity</string>
     <string name="title_activity_scaffold">ScaffoldActivity</string>
     <string name="title_activity_surface">SurfaceActivity</string>
+    <string name="title_activity_spacer">SpacerActivity</string>
 
 
 </resources>
